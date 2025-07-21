@@ -228,6 +228,413 @@ const Documentation = () => {
             </CardContent>
           </Card>
 
+          {/* Tutoriais de Customização */}
+          <Card>
+            <CardHeader>
+              <CardTitle>📝 Tutoriais de Customização</CardTitle>
+              <CardDescription>
+                Guias detalhados para modificar e personalizar o sistema
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              
+              {/* Tutorial 1: Adicionar Categorias */}
+              <div className="border rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-lg">🏷️ Como Adicionar Novas Categorias</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-medium mb-2">1. Modificar o Componente CategoryFilter</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/components/CategoryFilter.tsx</p>
+                      <div className="bg-background p-2 rounded">
+                        {`const categories = [
+  "Todos", "Ação", "Comédia", "Drama", "Terror",
+  "Ficção Científica", "Romance", "Aventura", "Suspense",
+  "Documentário", "Animação", "Fantasia" // ← Adicione aqui
+];`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">2. Atualizar o Valor Padrão no Banco</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">🗄️ SQL Migration</p>
+                      <div className="bg-background p-2 rounded">
+                        {`-- Opcional: Alterar valor padrão da categoria
+ALTER TABLE public.movies 
+ALTER COLUMN category SET DEFAULT 'Nova Categoria';`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">3. Atualizar Formulário Admin</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/components/MovieForm.tsx</p>
+                      <div className="bg-background p-2 rounded">
+                        {`<option value="Nova Categoria">Nova Categoria</option>`}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tutorial 2: Modificar Cores */}
+              <div className="border rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-lg">🎨 Como Modificar as Cores do Sistema</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-medium mb-2">1. Editar Paleta de Cores</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/index.css</p>
+                      <div className="bg-background p-2 rounded">
+                        {`:root {
+  --primary: 0 72% 51%;    /* Cor principal (vermelho) */
+  --secondary: 210 40% 98%; /* Cor secundária */
+  --accent: 210 40% 96%;    /* Cor de destaque */
+  --background: 0 0% 100%;  /* Fundo (branco) */
+  --foreground: 222 84% 5%; /* Texto principal (preto) */
+}`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">2. Cores para Modo Escuro</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <div className="bg-background p-2 rounded">
+                        {`.dark {
+  --primary: 0 72% 51%;     /* Mantém vermelho */
+  --background: 222 84% 5%; /* Fundo escuro */
+  --foreground: 210 40% 98%; /* Texto claro */
+}`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                    <p className="text-sm text-blue-700">
+                      💡 <strong>Dica:</strong> Use HSL (Hue, Saturation, Lightness) para facilitar ajustes de luminosidade
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tutorial 3: Adicionar Campos */}
+              <div className="border rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-lg">📋 Como Adicionar Novos Campos aos Filmes</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-medium mb-2">1. Criar Migration no Banco</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">🗄️ SQL Migration</p>
+                      <div className="bg-background p-2 rounded">
+                        {`-- Exemplo: Adicionar campo rating
+ALTER TABLE public.movies 
+ADD COLUMN rating DECIMAL(2,1) CHECK (rating >= 0 AND rating <= 10);
+
+-- Exemplo: Adicionar campo director
+ALTER TABLE public.movies 
+ADD COLUMN director TEXT;`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">2. Atualizar Interface TypeScript</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/hooks/useMovies.ts</p>
+                      <div className="bg-background p-2 rounded">
+                        {`interface Movie {
+  id: string;
+  title: string;
+  description?: string;
+  rating?: number;     // ← Novo campo
+  director?: string;   // ← Novo campo
+  // ... outros campos
+}`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">3. Adicionar ao Formulário</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/components/MovieForm.tsx</p>
+                      <div className="bg-background p-2 rounded">
+                        {`<Input
+  type="number"
+  step="0.1"
+  min="0"
+  max="10"
+  placeholder="Avaliação (0-10)"
+  value={formData.rating || ''}
+  onChange={(e) => setFormData({...formData, rating: parseFloat(e.target.value)})}
+/>`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">4. Exibir no Card</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/components/MovieCard.tsx</p>
+                      <div className="bg-background p-2 rounded">
+                        {`{movie.rating && (
+  <div className="flex items-center gap-1">
+    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+    <span className="text-sm font-medium">{movie.rating}</span>
+  </div>
+)}`}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tutorial 4: Configurar Player */}
+              <div className="border rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-lg">🎬 Como Configurar Diferentes Players de Vídeo</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-medium mb-2">1. YouTube Embed</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <div className="bg-background p-2 rounded">
+                        {`<iframe 
+  width="560" 
+  height="315" 
+  src="https://www.youtube.com/embed/VIDEO_ID" 
+  frameborder="0" 
+  allowfullscreen>
+</iframe>`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">2. Vimeo Embed</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <div className="bg-background p-2 rounded">
+                        {`<iframe 
+  src="https://player.vimeo.com/video/VIDEO_ID" 
+  width="560" 
+  height="315" 
+  frameborder="0" 
+  allowfullscreen>
+</iframe>`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">3. HTML5 Video</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <div className="bg-background p-2 rounded">
+                        {`<video 
+  width="560" 
+  height="315" 
+  controls>
+  <source src="URL_DO_VIDEO.mp4" type="video/mp4">
+</video>`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                    <p className="text-sm text-yellow-700">
+                      ⚠️ <strong>Importante:</strong> Para vídeos locais, você precisará configurar storage no Supabase
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tutorial 5: Responsividade */}
+              <div className="border rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-lg">📱 Como Ajustar Responsividade</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-medium mb-2">1. Grid de Filmes</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/pages/Index.tsx</p>
+                      <div className="bg-background p-2 rounded">
+                        {`// Modificar classes do grid
+<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+  {/* 2 no mobile, 3 no tablet, 4 no desktop, 5 em telas grandes */}
+</div>`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">2. Breakpoints Tailwind</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <div className="bg-background p-2 rounded">
+                        {`sm: 640px   // Small devices
+md: 768px   // Medium devices  
+lg: 1024px  // Large devices
+xl: 1280px  // Extra large devices
+2xl: 1536px // 2X large devices`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">3. Player Modal Responsivo</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/components/VideoModal.tsx</p>
+                      <div className="bg-background p-2 rounded">
+                        {`<div className="w-full max-w-4xl mx-auto p-4">
+  <div className="aspect-video w-full">
+    {/* Player aqui */}
+  </div>
+</div>`}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tutorial 6: SEO e Meta Tags */}
+              <div className="border rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-lg">🔍 Como Otimizar SEO</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-medium mb-2">1. Meta Tags no HTML</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 index.html</p>
+                      <div className="bg-background p-2 rounded">
+                        {`<meta name="description" content="Plataforma de streaming de filmes">
+<meta name="keywords" content="filmes, streaming, cinema">
+<meta property="og:title" content="CineTube - Seus Filmes Favoritos">
+<meta property="og:description" content="Assista aos melhores filmes online">
+<meta property="og:image" content="/thumbnail.jpg">`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">2. Structured Data (JSON-LD)</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <div className="bg-background p-2 rounded">
+                        {`<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CineTube",
+  "url": "https://seusite.com"
+}
+</script>`}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tutorial 7: Performance */}
+              <div className="border rounded-lg p-4">
+                <h4 className="font-semibold mb-3 text-lg">⚡ Como Otimizar Performance</h4>
+                
+                <div className="space-y-4">
+                  <div>
+                    <h5 className="font-medium mb-2">1. Lazy Loading de Imagens</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/components/MovieCard.tsx</p>
+                      <div className="bg-background p-2 rounded">
+                        {`<img 
+  src={movie.thumbnail_url}
+  alt={movie.title}
+  loading="lazy"  // ← Adicione esta propriedade
+  className="w-full h-48 object-cover"
+/>`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">2. Paginação de Filmes</h5>
+                    <div className="bg-muted p-3 rounded font-mono text-sm">
+                      <p className="text-muted-foreground mb-2">📁 src/hooks/useMovies.ts</p>
+                      <div className="bg-background p-2 rounded">
+                        {`const { data, error } = await supabase
+  .from("movies")
+  .select("*")
+  .range(page * limit, (page + 1) * limit - 1)  // ← Paginação
+  .order("created_at", { ascending: false });`}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h5 className="font-medium mb-2">3. Otimização de Imagens</h5>
+                    <div className="bg-green-50 p-3 rounded-lg border border-green-200">
+                      <p className="text-sm text-green-700">
+                        💡 <strong>Dica:</strong> Use serviços como Cloudinary ou ImageKit para otimizar automaticamente as thumbnails
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </CardContent>
+          </Card>
+
+          {/* Troubleshooting */}
+          <Card>
+            <CardHeader>
+              <CardTitle>🔧 Solução de Problemas Comuns</CardTitle>
+              <CardDescription>
+                Problemas frequentes e suas soluções
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              
+              <div className="border-l-4 border-red-500 pl-4">
+                <h4 className="font-semibold text-red-700">❌ Filmes não aparecem na tela</h4>
+                <ul className="text-sm text-red-600 mt-2 space-y-1">
+                  <li>• Verifique se o Supabase está conectado</li>
+                  <li>• Confirme se as políticas RLS estão ativas</li>
+                  <li>• Cheque se há dados na tabela movies</li>
+                </ul>
+              </div>
+
+              <div className="border-l-4 border-yellow-500 pl-4">
+                <h4 className="font-semibold text-yellow-700">⚠️ Player não carrega vídeos</h4>
+                <ul className="text-sm text-yellow-600 mt-2 space-y-1">
+                  <li>• Verifique se o embed_code está correto</li>
+                  <li>• Teste o código embed em uma página HTML simples</li>
+                  <li>• Confirme se o vídeo está público</li>
+                </ul>
+              </div>
+
+              <div className="border-l-4 border-blue-500 pl-4">
+                <h4 className="font-semibold text-blue-700">ℹ️ Erro ao adicionar filme</h4>
+                <ul className="text-sm text-blue-600 mt-2 space-y-1">
+                  <li>• Verifique se todos os campos obrigatórios estão preenchidos</li>
+                  <li>• Confirme se a URL da thumbnail é válida</li>
+                  <li>• Teste a conexão com o banco de dados</li>
+                </ul>
+              </div>
+
+              <div className="border-l-4 border-green-500 pl-4">
+                <h4 className="font-semibold text-green-700">✅ Site lento para carregar</h4>
+                <ul className="text-sm text-green-600 mt-2 space-y-1">
+                  <li>• Implemente lazy loading nas imagens</li>
+                  <li>• Adicione paginação nos filmes</li>
+                  <li>• Otimize as imagens das thumbnails</li>
+                  <li>• Use CDN para assets estáticos</li>
+                </ul>
+              </div>
+
+            </CardContent>
+          </Card>
+
           {/* Tecnologias */}
           <Card>
             <CardHeader>
