@@ -1,4 +1,4 @@
-import { Search, Play, Settings } from "lucide-react";
+import { Search, Play, Settings, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,13 +39,21 @@ export const MovieHeader = ({ onSearch, searchQuery }: MovieHeaderProps) => {
             </div>
           </div>
 
-          {/* Admin Button */}
-          <Link to="/admin">
-            <Button variant="outline" className="flex items-center gap-2">
-              <Settings className="w-4 h-4" />
-              Admin
-            </Button>
-          </Link>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2">
+            <Link to="/docs">
+              <Button variant="outline" size="sm" className="flex items-center gap-2">
+                <BookOpen className="w-4 h-4" />
+                Docs
+              </Button>
+            </Link>
+            <Link to="/licumi">
+              <Button variant="outline" className="flex items-center gap-2">
+                <Settings className="w-4 h-4" />
+                Admin
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </header>
